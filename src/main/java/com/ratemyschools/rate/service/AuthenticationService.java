@@ -42,6 +42,7 @@ public class AuthenticationService {
         sendVerificationEmail(user);
         return userRepository.save(user);
     }
+    
 
     public User authenticate(LoginUserDto input) {
         User user = userRepository.findByEmail(input.getEmail())
@@ -102,7 +103,7 @@ public class AuthenticationService {
         String htmlMessage = "<html>"
                 + "<body style=\"font-family: Arial, sans-serif;\">"
                 + "<div style=\"background-color: #f5f5f5; padding: 20px;\">"
-                + "<h2 style=\"color: #333;\">Welcome to our app!</h2>"
+                + "<h2 style=\"color: #333;\">Welcome to rate my schools!</h2>"
                 + "<p style=\"font-size: 16px;\">Please enter the verification code below to continue:</p>"
                 + "<div style=\"background-color: #fff; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1);\">"
                 + "<h3 style=\"color: #333;\">Verification Code:</h3>"
@@ -123,5 +124,81 @@ public class AuthenticationService {
         Random random = new Random();
         int code = random.nextInt(900000) + 100000;
         return String.valueOf(code);
+    }
+
+    public void initiateForgotPassword(String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        String forgotCode = generateVerificationCode();
+        user.setForgotCode(forgotCode);
+        user.setForgotCodeExpiresAt(LocalDateTime.now().plusMinutes(15));
+
+        sendForgotPasswordEmail(user);
+        userRepository.save(user);
+    }
+
+    public void resetPassword(String email, String forgotCode, String newPassword) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (user.getForgotCode() == null || user.getForgotCodeExpiresAt() == null) {
+            throw new RuntimeException("No reset password request found for this user.");
+        }
+        if (user.getForgotCodeExpiresAt().isBefore(LocalDateTime.now())) {
+            throw new RuntimeException("Forgot password code has expired.");
+        }
+
+        if (!user.getForgotCode().equals(forgotCode)) {
+            throw new RuntimeException("Invalid forgot password code.");
+        }
+
+        user.setPassword(passwordEncoder.encode(newPassword));
+        user.setForgotCode(null);
+        user.setForgotCodeExpiresAt(null);
+        userRepository.save(user);
+    }
+
+    private void sendForgotPasswordEmail(User user) {
+        String subject = "Reset Your Password";
+        String forgotCode = "Forgot Code: " + user.getForgotCode();
+        String htmlMessage = "<html>"
+                + "<body style=\"font-family: Arial, sans-serif;\">"
+                + "<div style=\"background-color: #f5f5f5; padding: 20px;\">"
+                + "<h2 style=\"color: #333;\">Password Reset Request</h2>"
+                + "<p style=\"font-size: 16px;\">Use the following code to reset your password:</p>"
+                + "<div style=\"background-color: #fff; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1);\">"
+                + "<h3 style=\"color: #333;\">Forgot Code:</h3>"
+                + "<p style=\"font-size: 18px; font-weight: bold; color: #007bff;\">" + forgotCode + "</p>"
+                + "</div>"
+                + "<p>This code will expire in 15 minutes.</p>"
+                + "</div>"
+                + "</body>"
+                + "</html>";
+
+        try {
+            emailService.sendVerificationEmail(user.getEmail(), subject, htmlMessage);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Failed to send forgot password email.");
+        }
+    }
+    public void resendForgotPasswordCode(String email) {
+        Optional<User> optionalUser = userRepository.findByEmail(email);
+
+        if (optionalUser.isEmpty()) {
+            throw new RuntimeException("User not found");
+        }
+
+        User user = optionalUser.get();
+
+        String forgotCode = generateVerificationCode();
+        LocalDateTime forgotCodeExpiresAt = LocalDateTime.now().plusMinutes(15);
+
+        user.setForgotCode(forgotCode);
+        user.setForgotCodeExpiresAt(forgotCodeExpiresAt);
+
+        userRepository.save(user);
+
+        sendForgotPasswordEmail(user);
     }
 }

@@ -30,6 +30,10 @@ public class User implements UserDetails {
     @Column(name = "verification_expiration")
     private LocalDateTime verificationCodeExpiresAt;
     private boolean enabled;
+    @Column(name="forgot_code")
+    private String forgotCode;
+    @Column(name="forgot_expiration")
+    private LocalDateTime forgotCodeExpiresAt;
 
     //constructor for creating an unverified user
     public User(String username, String email, String password) {
@@ -40,6 +44,7 @@ public class User implements UserDetails {
     //default constructor
     public User(){
     }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
