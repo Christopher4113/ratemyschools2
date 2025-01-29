@@ -1,5 +1,6 @@
 package com.ratemyschools.rate.controller;
 
+import com.ratemyschools.rate.dto.ForgotUserDto;
 import com.ratemyschools.rate.dto.LoginUserDto;
 import com.ratemyschools.rate.dto.RegisterUserDto;
 import com.ratemyschools.rate.dto.VerifyUserDto;
@@ -56,27 +57,27 @@ public class AuthenticationController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-    @PostMapping("/forgot-password")
-    public ResponseEntity<?> forgotPassword(@RequestBody String email) {
+    @PostMapping("/forgotPassword")
+    public ResponseEntity<?> forgotPassword(@RequestBody ForgotUserDto forgotUserDto) {
         try {
-            authenticationService.initiateForgotPassword(email);
+            authenticationService.initiateForgotPassword(forgotUserDto);
             return ResponseEntity.ok("Forgot password email sent");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
-    @PostMapping("/reset-password")
-    public ResponseEntity<?> resetPassword(@RequestBody String email, String forgotCode, String newPassword) {
+    @PostMapping("/resetPassword")
+    public ResponseEntity<?> resetPassword(@RequestBody ForgotUserDto forgotUserDto) {
         try {
-            authenticationService.resetPassword(email, forgotCode, newPassword);
+            authenticationService.resetPassword(forgotUserDto);
             return ResponseEntity.ok("Password reset successfully");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
-    @PostMapping("/resend-forgot")
+    @PostMapping("/resendForgot")
     public ResponseEntity<?> resendForgotPasswordCode(@RequestParam String email) {
         try {
             authenticationService.resendForgotPasswordCode(email);

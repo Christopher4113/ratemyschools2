@@ -8,6 +8,7 @@ import lombok.Setter;
 public class ForgotUserDto {
     private String email;
     private String forgotCode;
+    private String newPassword;
 
     public String getEmail() {
         return email;
@@ -23,5 +24,13 @@ public class ForgotUserDto {
 
     public void setForgotCode(String forgotCode) {
         this.forgotCode = forgotCode;
+    }
+
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
     }
 }

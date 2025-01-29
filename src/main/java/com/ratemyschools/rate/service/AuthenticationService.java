@@ -1,5 +1,6 @@
 package com.ratemyschools.rate.service;
 
+import com.ratemyschools.rate.dto.ForgotUserDto;
 import com.ratemyschools.rate.dto.LoginUserDto;
 import com.ratemyschools.rate.dto.RegisterUserDto;
 import com.ratemyschools.rate.dto.VerifyUserDto;
@@ -126,8 +127,8 @@ public class AuthenticationService {
         return String.valueOf(code);
     }
 
-    public void initiateForgotPassword(String email) {
-        User user = userRepository.findByEmail(email)
+    public void initiateForgotPassword(ForgotUserDto input) {
+        User user = userRepository.findByEmail(input.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found"));
         String forgotCode = generateVerificationCode();
         user.setForgotCode(forgotCode);
@@ -137,27 +138,31 @@ public class AuthenticationService {
         userRepository.save(user);
     }
 
-    public void resetPassword(String email, String forgotCode, String newPassword) {
-        User user = userRepository.findByEmail(email)
+    public void resetPassword(ForgotUserDto input) {
+        User user = userRepository.findByEmail(input.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
+        // Check if a reset password request exists
         if (user.getForgotCode() == null || user.getForgotCodeExpiresAt() == null) {
             throw new RuntimeException("No reset password request found for this user.");
         }
+
+        // Check if the reset code has expired
         if (user.getForgotCodeExpiresAt().isBefore(LocalDateTime.now())) {
             throw new RuntimeException("Forgot password code has expired.");
         }
 
-        if (!user.getForgotCode().equals(forgotCode)) {
+        // Validate the provided forgot code
+        if (!user.getForgotCode().equals(input.getForgotCode())) {
             throw new RuntimeException("Invalid forgot password code.");
         }
 
-        user.setPassword(passwordEncoder.encode(newPassword));
+        // Update the user's password and reset forgot password fields
+        user.setPassword(passwordEncoder.encode(input.getNewPassword()));
         user.setForgotCode(null);
         user.setForgotCodeExpiresAt(null);
         userRepository.save(user);
     }
-
     private void sendForgotPasswordEmail(User user) {
         String subject = "Reset Your Password";
         String forgotCode = "Forgot Code: " + user.getForgotCode();
