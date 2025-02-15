@@ -25,4 +25,22 @@ public class School {
     @OneToMany(mappedBy = "school", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Athletics> athletics;
 
+    @OneToMany(mappedBy = "school", cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Clubs> clubs;
+
+    @OneToMany(mappedBy = "school", cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Housing> housing;
+
+    @OneToMany(mappedBy = "school", cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Jobs> jobs;
+
+    @OneToMany(mappedBy = "school", cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<LifeStyle> lifestyle;
+
+    @OneToMany(mappedBy = "school", cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Major> majors;
+
+    @OneToMany(mappedBy = "school", cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Other> other;
+
 }
