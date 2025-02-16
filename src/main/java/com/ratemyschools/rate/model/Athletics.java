@@ -8,6 +8,8 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -23,4 +25,7 @@ public class Athletics {
 
     @Column(name = "category")
     private String category;
+
+    @OneToMany(mappedBy = "athletics", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<AthleticsReview> athleticsReview;
 }

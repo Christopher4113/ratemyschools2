@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -19,4 +21,7 @@ public class Other {
     @ManyToOne
     @JoinColumn(name = "school_id", nullable = false)
     private School school;
+
+    @OneToMany(mappedBy = "other", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OtherReview> otherReview;
 }

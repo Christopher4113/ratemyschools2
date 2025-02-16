@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -19,5 +21,8 @@ public class LifeStyle{
     @ManyToOne
     @JoinColumn(name = "school_id", nullable = false)
     private School school;
+
+    @OneToMany(mappedBy = "lifeStyle", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<LifeStyleReview> lifeStyleReview;
 
 }
