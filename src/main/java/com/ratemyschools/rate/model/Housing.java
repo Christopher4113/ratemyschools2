@@ -15,7 +15,7 @@ public class Housing {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "type")
+    @Column(name = "type", columnDefinition = "VARCHAR(255)")
     private String type;
 
     @ManyToOne

@@ -9,7 +9,7 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
-@Table(name = "majors_reviews")
+@Table(name = "majors_review")
 public class MajorReview {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,10 +18,10 @@ public class MajorReview {
     @Column(name="rating")
     private Integer rating;
 
-    @Column(name = "review")
+    @Column(name = "review", columnDefinition = "TEXT")
     private String review;
 
-    @Column(name = "username")
+    @Column(name = "username", columnDefinition = "VARCHAR(255)")
     private String username;
 
     @Temporal(TemporalType.DATE)

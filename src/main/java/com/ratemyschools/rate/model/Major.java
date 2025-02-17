@@ -15,7 +15,7 @@ public class Major {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "major_name")
+    @Column(name = "major_name", columnDefinition = "VARCHAR(255)")
     private String majorName;
 
     @ManyToOne

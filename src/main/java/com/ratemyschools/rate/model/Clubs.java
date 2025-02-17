@@ -19,7 +19,7 @@ public class Clubs  {
     @JoinColumn(name = "school_id", nullable = false)
     private School school;
 
-    @Column(name = "club_name")
+    @Column(name = "club_name", columnDefinition = "VARCHAR(255)")
     private String clubName;
 
     @OneToMany(mappedBy = "clubs", cascade = CascadeType.ALL, orphanRemoval = true)

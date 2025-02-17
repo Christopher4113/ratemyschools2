@@ -15,7 +15,7 @@ public class Other {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "category")
+    @Column(name = "category", columnDefinition = "VARCHAR(255)")
     private String category;
 
     @ManyToOne

@@ -23,7 +23,7 @@ public class Athletics {
     @JoinColumn(name = "school_id", nullable = false)
     private School school;
 
-    @Column(name = "category")
+    @Column(name = "category", columnDefinition = "VARCHAR(255)")
     private String category;
 
     @OneToMany(mappedBy = "athletics", cascade = CascadeType.ALL, orphanRemoval = true)

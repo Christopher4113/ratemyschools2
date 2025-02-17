@@ -18,10 +18,10 @@ public class LifeStyleReview {
     @Column(name="rating")
     private Integer rating;
 
-    @Column(name = "review")
+    @Column(name = "review", columnDefinition = "TEXT")
     private String review;
 
-    @Column(name = "username")
+    @Column(name = "username", columnDefinition = "VARCHAR(255)")
     private String username;
 
     @Temporal(TemporalType.DATE)
