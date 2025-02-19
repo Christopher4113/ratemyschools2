@@ -1,5 +1,6 @@
 package com.ratemyschools.rate.controller;
 
+import com.ratemyschools.rate.dto.SearchSchoolDto;
 import com.ratemyschools.rate.service.JwtService;
 import com.ratemyschools.rate.service.SchoolService;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,7 +24,7 @@ public class SchoolController {
     }
     // Endpoint to get all school names
     @GetMapping("/schools")
-    public List<String> getAllSchoolNames() {
+    public List<SearchSchoolDto> getAllSchoolNames() {
         return schoolService.getAllSchoolNames();
     }
 }
