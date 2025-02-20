@@ -21,8 +21,6 @@ public class HousingReview {
     @Column(name = "review", columnDefinition = "TEXT")
     private String review;
 
-    @Column(name = "username", columnDefinition = "VARCHAR(255)")
-    private String username;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "created_at")
