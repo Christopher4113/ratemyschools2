@@ -1,14 +1,13 @@
 package com.ratemyschools.rate.controller;
 
+import com.ratemyschools.rate.dto.IndividualSchoolDto;
 import com.ratemyschools.rate.dto.SearchSchoolDto;
 import com.ratemyschools.rate.service.JwtService;
 import com.ratemyschools.rate.service.SchoolService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequestMapping("/auth")
 @RestController
@@ -26,5 +25,10 @@ public class SchoolController {
     @GetMapping("/schools")
     public List<SearchSchoolDto> getAllSchoolNames() {
         return schoolService.getAllSchoolNames();
+    }
+
+    @GetMapping("/getSchool/{id}")
+    public IndividualSchoolDto getIndividualSchool(@PathVariable Long id) {
+       return schoolService.getIndividualSchool(id);
     }
 }
