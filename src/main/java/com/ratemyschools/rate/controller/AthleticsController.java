@@ -1,6 +1,7 @@
 package com.ratemyschools.rate.controller;
 
-import com.ratemyschools.rate.dto.AthleticsDto;
+import com.ratemyschools.rate.dto.Athletics.AthleticsDto;
+import com.ratemyschools.rate.dto.Athletics.GetAthleticsCategoryDto;
 import com.ratemyschools.rate.service.AthleticService;
 import com.ratemyschools.rate.service.JwtService;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,11 @@ public class AthleticsController {
     @GetMapping("/getAthletics/{prevId}")
     public List<AthleticsDto> getAthleticsInfo(@PathVariable("prevId") Long id) {
         return athleticService.getAthleticsInfo(id);
+    }
+
+    @GetMapping("/getCategory/{prevId}")
+    public GetAthleticsCategoryDto getCategory(@PathVariable("prevId") Long id) {
+        return athleticService.getCategory(id);
     }
 
 }

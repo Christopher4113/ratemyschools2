@@ -1,6 +1,5 @@
-package com.ratemyschools.rate.dto;
+package com.ratemyschools.rate.dto.Athletics;
 
-import com.ratemyschools.rate.model.School;
 import lombok.Getter;
 import lombok.Setter;
 

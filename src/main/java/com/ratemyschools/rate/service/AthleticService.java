@@ -1,6 +1,7 @@
 package com.ratemyschools.rate.service;
 
-import com.ratemyschools.rate.dto.AthleticsDto;
+import com.ratemyschools.rate.dto.Athletics.AthleticsDto;
+import com.ratemyschools.rate.dto.Athletics.GetAthleticsCategoryDto;
 import com.ratemyschools.rate.model.Athletics;
 import com.ratemyschools.rate.repository.AthleticsRepository;
 import org.springframework.stereotype.Service;
@@ -24,5 +25,22 @@ public class AthleticService {
             dto.setCategory(athletics.getCategory());
             return dto;
         }).collect(Collectors.toList());
+    }
+
+    public GetAthleticsCategoryDto getCategory(Long id) {
+        Optional<Athletics> athleticsOptional = athleticsRepository.findById(id);
+
+        // Return a DTO with the category or an empty category if not found
+        return athleticsOptional.map(athletics -> {
+            GetAthleticsCategoryDto dto = new GetAthleticsCategoryDto();
+            dto.setId(athletics.getId());
+            dto.setCategory(athletics.getCategory());
+            return dto;
+        }).orElseGet(() -> {
+            GetAthleticsCategoryDto dto = new GetAthleticsCategoryDto();
+            dto.setId(id);  // Set the id if not found (could be a placeholder for "not found")
+            dto.setCategory("Category not found");
+            return dto;
+        });
     }
 }
