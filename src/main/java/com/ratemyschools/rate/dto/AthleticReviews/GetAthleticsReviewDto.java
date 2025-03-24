@@ -1,4 +1,4 @@
-package com.ratemyschools.rate.dto;
+package com.ratemyschools.rate.dto.AthleticReviews;
 
 import lombok.Getter;
 import lombok.Setter;
