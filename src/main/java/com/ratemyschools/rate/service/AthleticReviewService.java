@@ -1,6 +1,7 @@
 package com.ratemyschools.rate.service;
 
 
+import com.ratemyschools.rate.dto.AthleticReviews.AddAthleticsReviewDto;
 import com.ratemyschools.rate.dto.AthleticReviews.GetAthleticsReviewDto;
 import com.ratemyschools.rate.model.AthleticsReview;
 import com.ratemyschools.rate.repository.AthleticsReviewRepository;
@@ -32,6 +33,16 @@ public class AthleticReviewService {
     }
     public Long getTotalReviews(Long athleteId) {
         return athleticsReviewRepository.countByAthleticsId(athleteId);
+    }
+
+    public AthleticsReview addReview(AddAthleticsReviewDto input) {
+        AthleticsReview athleticsReview = new AthleticsReview();
+        athleticsReview.setAthletics(input.getAthletics());
+        athleticsReview.setRating(input.getRating());
+        athleticsReview.setReview(input.getReview());
+        athleticsReview.setCreatedAt(input.getCreatedAt());
+
+        return athleticsReviewRepository.save(athleticsReview);
     }
 
 

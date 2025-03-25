@@ -1,9 +1,13 @@
 package com.ratemyschools.rate.controller;
 
+import com.ratemyschools.rate.dto.AthleticReviews.AddAthleticsReviewDto;
 import com.ratemyschools.rate.dto.AthleticReviews.GetAthleticsAverageRatingDto;
 import com.ratemyschools.rate.dto.AthleticReviews.GetAthleticsReviewDto;
 import com.ratemyschools.rate.dto.AthleticReviews.GetAthleticsTotalReviewsDto;
+import com.ratemyschools.rate.model.AthleticsReview;
 import com.ratemyschools.rate.service.AthleticReviewService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,5 +40,19 @@ public class AthleticsReviewController {
         dto.setId(id);
         dto.setTotalReviews(totalReviews);
         return dto;
+    }
+
+    @PostMapping("/postAthleticsReview")
+    public ResponseEntity<AthleticsReview> addReview(@RequestBody AddAthleticsReviewDto addAthleticsReviewDto) {
+        try {
+            // Call the service method to save the review
+            AthleticsReview savedReview = athleticReviewService.addReview(addAthleticsReviewDto);
+
+            // Return the saved review with a CREATED status
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedReview);
+        } catch (Exception e) {
+            // Handle any exceptions and return an error response
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 }
