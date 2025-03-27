@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Date;
 
 @RequestMapping("/auth")
 @RestController
@@ -46,6 +47,7 @@ public class AthleticsReviewController {
     public ResponseEntity<AthleticsReview> addReview(@RequestBody AddAthleticsReviewDto addAthleticsReviewDto) {
         try {
             // Call the service method to save the review
+            addAthleticsReviewDto.setCreatedAt(new Date());
             AthleticsReview savedReview = athleticReviewService.addReview(addAthleticsReviewDto);
 
             // Return the saved review with a CREATED status
