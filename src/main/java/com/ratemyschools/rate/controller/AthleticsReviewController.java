@@ -6,6 +6,7 @@ import com.ratemyschools.rate.dto.AthleticReviews.GetAthleticsReviewDto;
 import com.ratemyschools.rate.dto.AthleticReviews.GetAthleticsTotalReviewsDto;
 import com.ratemyschools.rate.model.AthleticsReview;
 import com.ratemyschools.rate.service.AthleticReviewService;
+import com.ratemyschools.rate.service.JwtService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +18,11 @@ import java.util.Date;
 @RestController
 @CrossOrigin("http://localhost:5173")
 public class AthleticsReviewController {
+    private final JwtService jwtService;
     private final AthleticReviewService athleticReviewService;
 
-    public AthleticsReviewController(AthleticReviewService athleticReviewService) {
+    public AthleticsReviewController(JwtService jwtService, AthleticReviewService athleticReviewService) {
+        this.jwtService = jwtService;
         this.athleticReviewService = athleticReviewService;
     }
     @GetMapping("/getAthleticsReview/{id}")
