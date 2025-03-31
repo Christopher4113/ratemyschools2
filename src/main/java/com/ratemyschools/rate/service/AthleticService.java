@@ -23,6 +23,7 @@ public class AthleticService {
             AthleticsDto dto = new AthleticsDto();
             dto.setId(athletics.getId());
             dto.setCategory(athletics.getCategory());
+            dto.setDescription(athletics.getDescription());
             return dto;
         }).collect(Collectors.toList());
     }

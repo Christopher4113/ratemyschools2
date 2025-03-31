@@ -23,6 +23,7 @@ public class ClubService {
             ClubsDto dto = new ClubsDto();
             dto.setId(clubs.getId());
             dto.setClubName(clubs.getClubName());
+            dto.setDescription(clubs.getDescription());
             return dto;
         }).collect(Collectors.toList());
     }

@@ -26,6 +26,9 @@ public class Athletics {
     @Column(name = "category", columnDefinition = "VARCHAR(255)")
     private String category;
 
+    @Column(name = "description" , columnDefinition = "TEXT")
+    private String description;
+
     @OneToMany(mappedBy = "athletics", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AthleticsReview> athleticsReview;
 }

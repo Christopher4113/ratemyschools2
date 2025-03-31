@@ -18,6 +18,9 @@ public class Major {
     @Column(name = "major_name", columnDefinition = "VARCHAR(255)")
     private String majorName;
 
+    @Column(name = "description" , columnDefinition = "TEXT")
+    private String description;
+
     @ManyToOne
     @JoinColumn(name = "school_id", nullable = false)
     private School school;

@@ -8,6 +8,15 @@ import lombok.Setter;
 public class ClubsDto {
     private Long id;
     private String clubName;
+    private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public Long getId() {
         return id;

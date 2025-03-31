@@ -18,6 +18,9 @@ public class Housing {
     @Column(name = "type", columnDefinition = "VARCHAR(255)")
     private String type;
 
+    @Column(name = "description" , columnDefinition = "TEXT")
+    private String description;
+
     @ManyToOne
     @JoinColumn(name = "school_id", nullable = false)
     private School school;

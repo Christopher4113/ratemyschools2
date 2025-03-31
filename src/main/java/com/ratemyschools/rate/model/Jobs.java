@@ -18,6 +18,9 @@ public class Jobs {
     @Column(name = "category", columnDefinition = "VARCHAR(255)")
     private String category;
 
+    @Column(name = "description" , columnDefinition = "TEXT")
+    private String description;
+
     @ManyToOne
     @JoinColumn(name = "school_id", nullable = false)
     private School school;
