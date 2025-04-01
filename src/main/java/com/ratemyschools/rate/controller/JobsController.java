@@ -25,7 +25,7 @@ public class JobsController {
         return jobService.getJobsInfo(id);
     }
 
-    @GetMapping("getCategory/{prevId}")
+    @GetMapping("getJobsCategory/{prevId}")
     public GetJobsCategoryDto getCategory(@PathVariable("prevId") Long id) {
         return jobService.getCategory(id);
     }
