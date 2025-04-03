@@ -8,13 +8,13 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface LifeStylesReviewRepository extends CrudRepository<LifeStyleReview,Long> {
-    List<LifeStyleReview> findByLifeStylesId(Long lifestylesId);
+public interface LifeStylesReviewRepository extends CrudRepository<LifeStyleReview, Long> {
+    List<LifeStyleReview> findByLifeStyle_Id(Long lifeStyleId); // Correct field reference
     List<LifeStyleReview> findByRating(Long rating);
 
-    @Query("SELECT AVG(l.rating) FROM LifeStylesReview l WHERE l.lifestyles.id = :lifestylesId")
-    Integer findAverageRatingByLifeStylesId(Long lifestylesId);
+    @Query("SELECT AVG(l.rating) FROM LifeStyleReview l WHERE l.lifeStyle.id = :lifeStyleId")
+    Integer findAverageRatingByLifeStylesId(Long lifeStyleId);
 
-    @Query("SELECT COUNT(l) FROM LifeStylesReview l WHERE l.lifestyles.id = :lifestylesId")
-    Long countByLifeStylesId(Long lifestylesId);
+    @Query("SELECT COUNT(l) FROM LifeStyleReview l WHERE l.lifeStyle.id = :lifeStyleId")
+    Long countByLifeStylesId(Long lifeStyleId);
 }

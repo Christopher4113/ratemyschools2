@@ -15,8 +15,8 @@ public class LifeStyleReviewService {
 
     public LifeStyleReviewService(LifeStylesReviewRepository lifeStylesReviewRepository) {this.lifeStylesReviewRepository = lifeStylesReviewRepository;}
 
-    public List<GetLifeStylesReviewDto> getLifeStylesReviewInfo(Long lifestyleId) {
-        List<LifeStyleReview> lifeStyleReviewList = lifeStylesReviewRepository.findByLifeStylesId(lifestyleId);
+    public List<GetLifeStylesReviewDto> getLifeStylesReviewInfo(Long lifeStyleId) {
+        List<LifeStyleReview> lifeStyleReviewList = lifeStylesReviewRepository.findByLifeStyle_Id(lifeStyleId);
 
         return lifeStyleReviewList.stream().map(lifeStyleReview -> {
             GetLifeStylesReviewDto dto = new GetLifeStylesReviewDto();
@@ -28,11 +28,11 @@ public class LifeStyleReviewService {
         }).collect(Collectors.toList());
     }
 
-    public Integer getAverageRating(Long lifestyleId) {
-        return lifeStylesReviewRepository.findAverageRatingByLifeStylesId(lifestyleId);
+    public Integer getAverageRating(Long lifeStyleId) {
+        return lifeStylesReviewRepository.findAverageRatingByLifeStylesId(lifeStyleId);
     }
-    public Long getTotalReviews(Long lifestyleId) {
-        return lifeStylesReviewRepository.countByLifeStylesId(lifestyleId);
+    public Long getTotalReviews(Long lifeStyleId) {
+        return lifeStylesReviewRepository.countByLifeStylesId(lifeStyleId);
     }
 
     public LifeStyleReview addReview(AddLifeStylesReviewDto input) {
