@@ -34,7 +34,7 @@ public class User implements UserDetails {
     private String forgotCode;
     @Column(name="forgot_expiration")
     private LocalDateTime forgotCodeExpiresAt;
-    @Column(name = "isAdmin", columnDefinition = "BOOLEAN")
+    @Column(name = "is_admin", columnDefinition = "BOOLEAN")
     public Boolean isAdmin;
 
     //constructor for creating an unverified user
