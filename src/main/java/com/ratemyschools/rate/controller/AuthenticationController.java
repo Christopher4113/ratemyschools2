@@ -11,6 +11,9 @@ import com.ratemyschools.rate.service.JwtService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RequestMapping("/auth")
 @RestController
 @CrossOrigin("http://localhost:5173")
@@ -33,7 +36,11 @@ public class AuthenticationController {
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> authenticate(@RequestBody LoginUserDto loginUserDto) {
         User authenticatedUser = authenticationService.authenticate(loginUserDto);
-        String jwtToken = jwtService.generateToken(authenticatedUser);
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("isAdmin", authenticatedUser.getIsAdmin());
+
+        // ✅ Generate token with custom claims
+        String jwtToken = jwtService.generateToken(claims, authenticatedUser);
         LoginResponse loginResponse = new LoginResponse(jwtToken, jwtService.getExpirationTime());
         return ResponseEntity.ok(loginResponse);
     }
