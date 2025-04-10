@@ -1,5 +1,6 @@
 package com.ratemyschools.rate.controller;
 
+import com.ratemyschools.rate.dto.Users.GetUsersDto;
 import com.ratemyschools.rate.model.User;
 import com.ratemyschools.rate.service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -12,8 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RequestMapping("/users")
+@RequestMapping("/auth")
 @RestController
+@CrossOrigin("http://localhost:5173")
 public class UserController {
     private final UserService userService;
 
@@ -33,4 +35,8 @@ public class UserController {
         List<User> users = userService.allUsers();
         return ResponseEntity.ok(users);
     }
+
+    @GetMapping("/getUsers")
+    public List<GetUsersDto> getAllUsers() {return userService.getAllUsers();}
+
 }

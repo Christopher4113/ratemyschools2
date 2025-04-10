@@ -34,12 +34,15 @@ public class User implements UserDetails {
     private String forgotCode;
     @Column(name="forgot_expiration")
     private LocalDateTime forgotCodeExpiresAt;
+    @Column(name = "isAdmin", columnDefinition = "BOOLEAN")
+    public Boolean isAdmin;
 
     //constructor for creating an unverified user
     public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.isAdmin = false;
     }
     //default constructor
     public User(){

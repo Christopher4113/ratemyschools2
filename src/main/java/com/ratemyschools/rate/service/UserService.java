@@ -1,5 +1,6 @@
 package com.ratemyschools.rate.service;
 
+import com.ratemyschools.rate.dto.Users.GetUsersDto;
 import com.ratemyschools.rate.model.User;
 import com.ratemyschools.rate.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -18,5 +19,18 @@ public class UserService {
         List<User> users = new ArrayList<>();
         userRepository.findAll().forEach(users::add);
         return users;
+    }
+
+    public List<GetUsersDto> getAllUsers() {
+        Iterable<User> users = userRepository.findAll();
+        List<GetUsersDto> dtos = new ArrayList<>();
+        for (User user: users) {
+            GetUsersDto dto = new GetUsersDto();
+            dto.setId(user.getId());
+            dto.setUsername(user.getUsername());
+            dto.setAdmin(user.getIsAdmin());
+            dtos.add(dto);
+        }
+        return dtos;
     }
 }
