@@ -33,4 +33,19 @@ public class UserService {
         }
         return dtos;
     }
+    public boolean deleteUserById(Long id) {
+        if (userRepository.existsById(id)) {
+            userRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean updateUserAdminStatus(Long id, Boolean isAdmin) {
+        return userRepository.findById(id).map(user -> {
+            user.setIsAdmin(isAdmin);
+            userRepository.save(user);
+            return true;
+        }).orElse(false);
+    }
 }

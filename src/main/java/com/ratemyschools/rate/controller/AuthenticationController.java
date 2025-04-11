@@ -36,11 +36,7 @@ public class AuthenticationController {
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> authenticate(@RequestBody LoginUserDto loginUserDto) {
         User authenticatedUser = authenticationService.authenticate(loginUserDto);
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("isAdmin", authenticatedUser.getIsAdmin());
-
-        // ✅ Generate token with custom claims
-        String jwtToken = jwtService.generateToken(claims, authenticatedUser);
+        String jwtToken = jwtService.generateToken(authenticatedUser); // use User, not UserDetails
         LoginResponse loginResponse = new LoginResponse(jwtToken, jwtService.getExpirationTime());
         return ResponseEntity.ok(loginResponse);
     }

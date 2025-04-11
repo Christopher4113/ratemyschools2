@@ -1,5 +1,6 @@
 package com.ratemyschools.rate.service;
 
+import com.ratemyschools.rate.model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -31,12 +32,13 @@ public class JwtService {
         return claimsResolver.apply(claims);
     }
 
-    public String generateToken(UserDetails userDetails) {
-        return generateToken(new HashMap<>(), userDetails);
-    }
 
-    public String generateToken(Map<String,Object> extractClaims, UserDetails userDetails) {
-        return buildToken(extractClaims, userDetails, jwtExpiration);
+
+    public String generateToken(User user) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("userId", user.getId()); // 👈 Add user ID here
+        claims.put("isAdmin", user.getIsAdmin()); // optional: add more user-specific info
+        return buildToken(claims, user, jwtExpiration);
     }
 
     public long getExpirationTime() {
@@ -81,5 +83,17 @@ public class JwtService {
     private Key getSignInKey() {
         return Keys.secretKeyFor(SignatureAlgorithm.HS256); // Automatically generates a secure key
     }
+    public Long extractUserId(String token) {
+        Claims claims = extractAllClaims(token);
+        Object userId = claims.get("userId");
+        if (userId instanceof Integer) {
+            return ((Integer) userId).longValue();
+        } else if (userId instanceof Long) {
+            return (Long) userId;
+        } else {
+            throw new IllegalStateException("Invalid userId type in JWT");
+        }
+    }
+
 
 }
