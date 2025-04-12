@@ -1,6 +1,8 @@
 package com.ratemyschools.rate.service;
 
 import com.ratemyschools.rate.dto.IndividualSchoolDto;
+import com.ratemyschools.rate.dto.School.AddSchoolDto;
+import com.ratemyschools.rate.dto.School.UpdateSchoolDto;
 import com.ratemyschools.rate.dto.SearchSchoolDto;
 import com.ratemyschools.rate.repository.SchoolRepository;
 import com.ratemyschools.rate.model.School;
@@ -49,5 +51,36 @@ public class SchoolService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "School not found");
         }
     }
+
+    public School addSchool(AddSchoolDto input) {
+        School school = new School();
+        school.setSchoolName(input.getSchoolName());
+        school.setDescription(input.getDescription());
+        school.setLocation(input.getLocation());
+
+        return schoolRepository.save(school);
+    }
+
+    public School updateSchool(UpdateSchoolDto updateSchoolDto) {
+        Optional<School> optionalSchool = schoolRepository.findById(updateSchoolDto.getId());
+
+        if (optionalSchool.isPresent()) {
+            School school = optionalSchool.get();
+            school.setSchoolName(updateSchoolDto.getSchoolName());
+            school.setDescription(updateSchoolDto.getDescription());
+            school.setLocation(updateSchoolDto.getLocation());
+            return schoolRepository.save(school);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "School not found");
+        }
+    }
+    public boolean deleteSchoolById(Long id) {
+        if (schoolRepository.existsById(id)) {
+            schoolRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
 }
 
