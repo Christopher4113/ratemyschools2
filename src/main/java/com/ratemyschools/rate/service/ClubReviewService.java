@@ -44,4 +44,12 @@ public class ClubReviewService {
         clubsReview.setCreatedAt(input.getCreatedAt());
         return clubsReviewRepository.save(clubsReview);
     }
+
+    public boolean deleteClubsReviewById(Long id) {
+        if (clubsReviewRepository.existsById(id)) {
+            clubsReviewRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 }

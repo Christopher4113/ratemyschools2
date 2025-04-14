@@ -58,4 +58,14 @@ public class JobsReviewController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+    @DeleteMapping("/deleteJobsReview/{id}")
+    public ResponseEntity<String> deleteJobsReview(@PathVariable("id") Long id) {
+        boolean deleted = jobReviewService.deleteJobsReviewById(id);
+        if (deleted) {
+            return ResponseEntity.ok("Reviews deleted successfully.");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

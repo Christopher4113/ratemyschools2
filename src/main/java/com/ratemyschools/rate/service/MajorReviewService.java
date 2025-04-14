@@ -40,4 +40,12 @@ public class MajorReviewService {
         majorsReview.setCreatedAt(input.getCreatedAt());
         return majorReviewRepository.save(majorsReview);
     }
+
+    public boolean deleteMajorReviewById(Long id) {
+        if (majorReviewRepository.existsById(id)) {
+            majorReviewRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 }

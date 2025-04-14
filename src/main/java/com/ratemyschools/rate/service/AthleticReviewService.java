@@ -45,5 +45,13 @@ public class AthleticReviewService {
         return athleticsReviewRepository.save(athleticsReview);
     }
 
+    public boolean deleteAthleticReviewsById(Long id) {
+        if (athleticsReviewRepository.existsById(id)) {
+            athleticsReviewRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
 
 }

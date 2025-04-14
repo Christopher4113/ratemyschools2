@@ -60,4 +60,14 @@ public class ClubsReviewController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+    @DeleteMapping("/deleteClubsReview/{id}")
+    public ResponseEntity<String> deleteClubsReview(@PathVariable("id") Long id) {
+        boolean deleted = clubReviewService.deleteClubsReviewById(id);
+        if (deleted) {
+            return ResponseEntity.ok("Reviews deleted successfully.");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

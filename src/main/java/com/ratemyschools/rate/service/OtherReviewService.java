@@ -40,4 +40,11 @@ public class OtherReviewService {
         otherReview.setCreatedAt(input.getCreatedAt());
         return otherReviewRepository.save(otherReview);
     }
+    public boolean deleteOtherReviewById(Long id) {
+        if (otherReviewRepository.existsById(id)) {
+            otherReviewRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 }

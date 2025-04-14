@@ -43,4 +43,12 @@ public class LifeStyleReviewService {
         lifeStyleReview.setCreatedAt(input.getCreatedAt());
         return lifeStylesReviewRepository.save(lifeStyleReview);
     }
+
+    public boolean deleteLifeStyleReviewById(Long id) {
+        if (lifeStylesReviewRepository.existsById(id)) {
+            lifeStylesReviewRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 }

@@ -42,4 +42,12 @@ public class JobReviewService {
         jobsReview.setCreatedAt(input.getCreatedAt());
         return  jobsReviewRepository.save(jobsReview);
     }
+
+    public boolean deleteJobsReviewById(Long id) {
+        if (jobsReviewRepository.existsById(id)) {
+            jobsReviewRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 }

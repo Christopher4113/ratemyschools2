@@ -41,4 +41,12 @@ public class HousingReviewService {
         housingReview.setCreatedAt(input.getCreatedAt());
         return housingReviewRepository.save(housingReview);
     }
+
+    public boolean deleteHousingReviewById(Long id) {
+        if (housingReviewRepository.existsById(id)) {
+            housingReviewRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 }
