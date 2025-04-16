@@ -59,8 +59,8 @@ public class HousingService {
                 .orElseThrow(() -> new IllegalArgumentException("School not found with id: " + input.getSchoolId()));
         Housing housing = new Housing();
         housing.setSchool(school);
-        housing.setType(housing.getType());
-        housing.setDescription(housing.getDescription());
+        housing.setType(input.getType());
+        housing.setDescription(input.getDescription());
         return  housingRepository.save(housing);
     }
 

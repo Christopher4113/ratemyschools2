@@ -60,8 +60,8 @@ public class OtherService {
 
         Other other = new Other();
         other.setSchool(school);
-        other.setCategory(other.getCategory());
-        other.setDescription(other.getDescription());
+        other.setCategory(input.getCategory());
+        other.setDescription(input.getDescription());
         return otherRepository.save(other);
     }
 
