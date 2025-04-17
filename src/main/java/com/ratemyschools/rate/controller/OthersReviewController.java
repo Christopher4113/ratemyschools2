@@ -60,7 +60,7 @@ public class OthersReviewController {
         }
     }
 
-    @DeleteMapping("/postOthersReview/{id}")
+    @DeleteMapping("/deleteOthersReview/{id}")
     public ResponseEntity<String> deleteOthersReview(@PathVariable("id") Long id) {
         boolean deleted = otherReviewService.deleteOtherReviewById(id);
         if (deleted) {
