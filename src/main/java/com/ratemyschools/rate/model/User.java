@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 @Table(name = "users")
@@ -36,6 +37,9 @@ public class User implements UserDetails {
     private LocalDateTime forgotCodeExpiresAt;
     @Column(name = "is_admin", columnDefinition = "BOOLEAN")
     public Boolean isAdmin;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Profile profile;
+
 
     //constructor for creating an unverified user
     public User(String username, String email, String password) {

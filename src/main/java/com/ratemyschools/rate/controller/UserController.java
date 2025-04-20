@@ -21,12 +21,12 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/me")
-    public ResponseEntity<User> authenticatedUser() {
+   @GetMapping("/me")
+   public ResponseEntity<User> authenticateUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = (User) authentication.getPrincipal();
         return ResponseEntity.ok(currentUser);
-    }
+   }
 
     @GetMapping("/")
     public ResponseEntity<List<User>> allUsers() {

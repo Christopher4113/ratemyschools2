@@ -32,11 +32,13 @@ public class JwtService {
         return claimsResolver.apply(claims);
     }
 
+    public Long extractUserId(String token) {
+        return extractClaim(token, claims -> claims.get("userId", Long.class));
+    }
 
 
     public String generateToken(User user) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("userId", user.getId()); // 👈 Add user ID here
         claims.put("isAdmin", user.getIsAdmin()); // optional: add more user-specific info
         return buildToken(claims, user, jwtExpiration);
     }
@@ -50,6 +52,10 @@ public class JwtService {
             UserDetails userDetails,
             long expiration
     ) {
+        Long userId = ((User) userDetails).getId();
+
+        // Add userId to extraClaims
+        extraClaims.put("userId", userId);
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
@@ -61,7 +67,7 @@ public class JwtService {
     }
     public boolean isTokenValid(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
-        return (username.equals(userDetails.getUsername()) && isTokenExpired(token));
+        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
     private boolean isTokenExpired(String token) {
@@ -81,18 +87,8 @@ public class JwtService {
                 .getBody();
     }
     private Key getSignInKey() {
-        return Keys.secretKeyFor(SignatureAlgorithm.HS256); // Automatically generates a secure key
-    }
-    public Long extractUserId(String token) {
-        Claims claims = extractAllClaims(token);
-        Object userId = claims.get("userId");
-        if (userId instanceof Integer) {
-            return ((Integer) userId).longValue();
-        } else if (userId instanceof Long) {
-            return (Long) userId;
-        } else {
-            throw new IllegalStateException("Invalid userId type in JWT");
-        }
+        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
+        return Keys.hmacShaKeyFor(keyBytes); // Automatically generates a secure key
     }
 
 
