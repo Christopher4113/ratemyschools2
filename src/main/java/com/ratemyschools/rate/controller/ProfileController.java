@@ -1,6 +1,7 @@
 package com.ratemyschools.rate.controller;
 
 import com.ratemyschools.rate.dto.Profile.AddProfileDto;
+import com.ratemyschools.rate.dto.Profile.GetProfileDto;
 import com.ratemyschools.rate.model.Profile;
 import com.ratemyschools.rate.repository.UserRepository;
 import com.ratemyschools.rate.service.JwtService;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 
 
 @RequestMapping("/auth")
@@ -32,11 +34,14 @@ public class ProfileController {
     @PostMapping("/postProfile")
     public ResponseEntity<Profile> addProfile(@RequestBody AddProfileDto addProfileDto) {
         try {
-
             Profile profile = profileService.addProfile(addProfileDto);
             return ResponseEntity.status(HttpStatus.CREATED).body(profile);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+    }
+    @GetMapping("/getProfile/{userId}")
+    public Optional<GetProfileDto> getProfile(@PathVariable Long userId) {
+        return profileService.getProfileInfo(userId);
     }
 }

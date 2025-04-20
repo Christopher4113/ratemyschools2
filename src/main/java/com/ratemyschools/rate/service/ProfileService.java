@@ -1,12 +1,14 @@
 package com.ratemyschools.rate.service;
 
 import com.ratemyschools.rate.dto.Profile.AddProfileDto;
+import com.ratemyschools.rate.dto.Profile.GetProfileDto;
 import com.ratemyschools.rate.model.Profile;
 import com.ratemyschools.rate.model.User;
 import com.ratemyschools.rate.repository.ProfileRepository;
 import com.ratemyschools.rate.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -51,5 +53,21 @@ public class ProfileService {
             System.err.println("Unexpected error while adding profile: " + e.getMessage());
             throw new RuntimeException("Failed to add profile. Please try again later.");
         }
+    }
+    public Optional<GetProfileDto> getProfileInfo(Long id) {
+        Optional<Profile> profileOptional = profileRepository.findByUserId(id);
+        return profileOptional.map(profile -> {
+            GetProfileDto dto = new GetProfileDto();
+            dto.setId(profile.getId());
+            dto.setLocation(profile.getLocation());
+            dto.setMajor(profile.getMajor());
+            dto.setAcademicLevel(profile.getAcademicLevel());
+            dto.setCampusSetting(profile.getCampusSetting());
+            dto.setFinance(profile.getFinance());
+            dto.setGoals(profile.getGoals());
+            dto.setLiving(profile.getLiving());
+            dto.setPersonal(profile.getPersonal());
+            return dto;
+        });
     }
 }
