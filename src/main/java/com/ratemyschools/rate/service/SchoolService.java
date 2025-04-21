@@ -29,6 +29,8 @@ public class SchoolService {
             SearchSchoolDto schoolDto = new SearchSchoolDto();
             schoolDto.setId(school.getId());
             schoolDto.setSchoolName(school.getSchoolName());
+            schoolDto.setLocation(school.getLocation());
+            schoolDto.setDescription(school.getDescription());
             schoolDtos.add(schoolDto);
         }
         return schoolDtos;
