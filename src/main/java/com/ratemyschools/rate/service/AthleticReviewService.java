@@ -3,6 +3,7 @@ package com.ratemyschools.rate.service;
 
 import com.ratemyschools.rate.dto.AthleticReviews.AddAthleticsReviewDto;
 import com.ratemyschools.rate.dto.AthleticReviews.GetAthleticsReviewDto;
+import com.ratemyschools.rate.dto.AthleticReviews.SchoolAthleticsAverageDto;
 import com.ratemyschools.rate.model.AthleticsReview;
 import com.ratemyschools.rate.repository.AthleticsReviewRepository;
 import org.springframework.stereotype.Service;
@@ -53,5 +54,8 @@ public class AthleticReviewService {
         return false;
     }
 
+    public List<SchoolAthleticsAverageDto> getAverageRatingsForAllSchools() {
+        return athleticsReviewRepository.findAverageAthleticsRatingForAllSchools();
+    }
 
 }

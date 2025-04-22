@@ -2,6 +2,7 @@ package com.ratemyschools.rate.service;
 
 import com.ratemyschools.rate.dto.OtherReviews.AddOthersReviewDto;
 import com.ratemyschools.rate.dto.OtherReviews.GetOthersReviewDto;
+import com.ratemyschools.rate.dto.OtherReviews.SchoolOthersAverageDto;
 import com.ratemyschools.rate.model.OtherReview;
 import com.ratemyschools.rate.repository.OtherReviewRepository;
 import org.springframework.stereotype.Service;
@@ -47,4 +48,9 @@ public class OtherReviewService {
         }
         return false;
     }
+
+    public List<SchoolOthersAverageDto> getAverageRatingsForAllSchools() {
+        return otherReviewRepository.findAverageOthersRatingForAllSchools();
+    }
+
 }

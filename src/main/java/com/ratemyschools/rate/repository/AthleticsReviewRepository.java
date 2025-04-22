@@ -1,5 +1,6 @@
 package com.ratemyschools.rate.repository;
 
+import com.ratemyschools.rate.dto.AthleticReviews.SchoolAthleticsAverageDto;
 import com.ratemyschools.rate.model.AthleticsReview;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -17,4 +18,9 @@ public interface AthleticsReviewRepository extends CrudRepository<AthleticsRevie
 
     @Query("SELECT COUNT(a) FROM AthleticsReview a WHERE a.athletics.id = :athleticsId")
     Long countByAthleticsId(Long athleticsId);
+
+    @Query("SELECT new com.ratemyschools.rate.dto.AthleticReviews.SchoolAthleticsAverageDto(ar.athletics.school.id, ar.athletics.school.schoolName, AVG(ar.rating)) " +
+            "FROM AthleticsReview ar GROUP BY ar.athletics.school.id, ar.athletics.school.schoolName")
+    List<SchoolAthleticsAverageDto> findAverageAthleticsRatingForAllSchools();
+
 }

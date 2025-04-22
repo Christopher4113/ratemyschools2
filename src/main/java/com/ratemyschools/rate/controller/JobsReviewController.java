@@ -1,9 +1,6 @@
 package com.ratemyschools.rate.controller;
 
-import com.ratemyschools.rate.dto.JobReview.AddJobsReviewDto;
-import com.ratemyschools.rate.dto.JobReview.GetJobsAverageRatingDto;
-import com.ratemyschools.rate.dto.JobReview.GetJobsReviewDto;
-import com.ratemyschools.rate.dto.JobReview.GetJobsTotalReviewsDto;
+import com.ratemyschools.rate.dto.JobReview.*;
 import com.ratemyschools.rate.model.JobsReview;
 import com.ratemyschools.rate.service.JobReviewService;
 import com.ratemyschools.rate.service.JwtService;
@@ -68,4 +65,11 @@ public class JobsReviewController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/getAllSchoolsJobsAverage")
+    public ResponseEntity<List<SchoolJobsAverageDto>> getAllSchoolsJobsAverage() {
+        List<SchoolJobsAverageDto> averages = jobReviewService.getAverageRatingsForAllSchools();
+        return ResponseEntity.ok(averages);
+    }
+
 }

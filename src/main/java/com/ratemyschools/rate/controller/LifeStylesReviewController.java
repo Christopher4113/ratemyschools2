@@ -1,8 +1,5 @@
 package com.ratemyschools.rate.controller;
-import com.ratemyschools.rate.dto.LifeStylesReview.AddLifeStylesReviewDto;
-import com.ratemyschools.rate.dto.LifeStylesReview.GetLifeStylesAverageRatingDto;
-import com.ratemyschools.rate.dto.LifeStylesReview.GetLifeStylesReviewDto;
-import com.ratemyschools.rate.dto.LifeStylesReview.GetLifeStylesTotalReviewDto;
+import com.ratemyschools.rate.dto.LifeStylesReview.*;
 import com.ratemyschools.rate.model.LifeStyleReview;
 import com.ratemyschools.rate.service.JwtService;
 import com.ratemyschools.rate.service.LifeStyleReviewService;
@@ -67,4 +64,11 @@ public class LifeStylesReviewController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/getAllSchoolsLifeStyleAverage")
+    public ResponseEntity<List<SchoolLifeStyleAverageDto>> getAllSchoolsLifeStyleAverage() {
+        List<SchoolLifeStyleAverageDto> averages = lifeStyleReviewService.getAverageRatingsForAllSchools();
+        return ResponseEntity.ok(averages);
+    }
+
 }

@@ -2,6 +2,7 @@ package com.ratemyschools.rate.service;
 
 import com.ratemyschools.rate.dto.MajorReviews.AddMajorsReviewDto;
 import com.ratemyschools.rate.dto.MajorReviews.GetMajorsReviewDto;
+import com.ratemyschools.rate.dto.MajorReviews.SchoolMajorsAverageDto;
 import com.ratemyschools.rate.model.MajorReview;
 import com.ratemyschools.rate.repository.MajorReviewRepository;
 import org.springframework.stereotype.Service;
@@ -48,4 +49,8 @@ public class MajorReviewService {
         }
         return false;
     }
+    public List<SchoolMajorsAverageDto> getAverageRatingsForAllSchools() {
+        return majorReviewRepository.findAverageMajorsRatingForAllSchools();
+    }
+
 }

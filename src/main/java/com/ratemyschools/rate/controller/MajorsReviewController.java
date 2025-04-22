@@ -1,9 +1,6 @@
 package com.ratemyschools.rate.controller;
 
-import com.ratemyschools.rate.dto.MajorReviews.AddMajorsReviewDto;
-import com.ratemyschools.rate.dto.MajorReviews.GetMajorsAverageRatingDto;
-import com.ratemyschools.rate.dto.MajorReviews.GetMajorsReviewDto;
-import com.ratemyschools.rate.dto.MajorReviews.GetMajorsTotalReviewsDto;
+import com.ratemyschools.rate.dto.MajorReviews.*;
 import com.ratemyschools.rate.model.MajorReview;
 import com.ratemyschools.rate.service.JwtService;
 import com.ratemyschools.rate.service.MajorReviewService;
@@ -69,4 +66,11 @@ public class MajorsReviewController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/getAllSchoolsMajorsAverage")
+    public ResponseEntity<List<SchoolMajorsAverageDto>> getAllSchoolsMajorsAverage() {
+        List<SchoolMajorsAverageDto> averages = majorReviewService.getAverageRatingsForAllSchools();
+        return ResponseEntity.ok(averages);
+    }
+
 }

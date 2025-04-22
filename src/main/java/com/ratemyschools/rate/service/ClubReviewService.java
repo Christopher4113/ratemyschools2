@@ -2,6 +2,7 @@ package com.ratemyschools.rate.service;
 
 import com.ratemyschools.rate.dto.ClubReviews.AddClubsReviewDto;
 import com.ratemyschools.rate.dto.ClubReviews.GetClubsReviewDto;
+import com.ratemyschools.rate.dto.ClubReviews.SchoolClubsAverageDto;
 import com.ratemyschools.rate.model.ClubsReview;
 import com.ratemyschools.rate.repository.ClubsReviewRepository;
 import org.springframework.stereotype.Service;
@@ -52,4 +53,8 @@ public class ClubReviewService {
         }
         return false;
     }
+    public List<SchoolClubsAverageDto> getAverageRatingsForAllSchools() {
+        return clubsReviewRepository.findAverageClubsRatingForAllSchools();
+    }
+
 }

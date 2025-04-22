@@ -2,6 +2,7 @@ package com.ratemyschools.rate.service;
 
 import com.ratemyschools.rate.dto.JobReview.AddJobsReviewDto;
 import com.ratemyschools.rate.dto.JobReview.GetJobsReviewDto;
+import com.ratemyschools.rate.dto.JobReview.SchoolJobsAverageDto;
 import com.ratemyschools.rate.model.JobsReview;
 import com.ratemyschools.rate.repository.JobsReviewRepository;
 import org.springframework.stereotype.Service;
@@ -50,4 +51,9 @@ public class JobReviewService {
         }
         return false;
     }
+
+    public List<SchoolJobsAverageDto> getAverageRatingsForAllSchools() {
+        return jobsReviewRepository.findAverageJobsRatingForAllSchools();
+    }
+
 }

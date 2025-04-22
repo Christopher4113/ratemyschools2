@@ -2,6 +2,7 @@ package com.ratemyschools.rate.service;
 
 import com.ratemyschools.rate.dto.LifeStylesReview.AddLifeStylesReviewDto;
 import com.ratemyschools.rate.dto.LifeStylesReview.GetLifeStylesReviewDto;
+import com.ratemyschools.rate.dto.LifeStylesReview.SchoolLifeStyleAverageDto;
 import com.ratemyschools.rate.model.LifeStyleReview;
 import com.ratemyschools.rate.repository.LifeStylesReviewRepository;
 import org.springframework.stereotype.Service;
@@ -51,4 +52,8 @@ public class LifeStyleReviewService {
         }
         return false;
     }
+    public List<SchoolLifeStyleAverageDto> getAverageRatingsForAllSchools() {
+        return lifeStylesReviewRepository.findAverageLifeStyleRatingForAllSchools();
+    }
+
 }

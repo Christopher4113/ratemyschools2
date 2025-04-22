@@ -1,9 +1,6 @@
 package com.ratemyschools.rate.controller;
 
-import com.ratemyschools.rate.dto.OtherReviews.AddOthersReviewDto;
-import com.ratemyschools.rate.dto.OtherReviews.GetOthersAverageRatingDto;
-import com.ratemyschools.rate.dto.OtherReviews.GetOthersReviewDto;
-import com.ratemyschools.rate.dto.OtherReviews.GetOthersTotalReviewsDto;
+import com.ratemyschools.rate.dto.OtherReviews.*;
 import com.ratemyschools.rate.model.OtherReview;
 import com.ratemyschools.rate.service.JwtService;
 import com.ratemyschools.rate.service.OtherReviewService;
@@ -69,4 +66,11 @@ public class OthersReviewController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/getAllSchoolsOthersAverage")
+    public ResponseEntity<List<SchoolOthersAverageDto>> getAllSchoolsOthersAverage() {
+        List<SchoolOthersAverageDto> averages = otherReviewService.getAverageRatingsForAllSchools();
+        return ResponseEntity.ok(averages);
+    }
+
 }

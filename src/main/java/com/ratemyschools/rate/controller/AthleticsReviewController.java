@@ -1,9 +1,6 @@
 package com.ratemyschools.rate.controller;
 
-import com.ratemyschools.rate.dto.AthleticReviews.AddAthleticsReviewDto;
-import com.ratemyschools.rate.dto.AthleticReviews.GetAthleticsAverageRatingDto;
-import com.ratemyschools.rate.dto.AthleticReviews.GetAthleticsReviewDto;
-import com.ratemyschools.rate.dto.AthleticReviews.GetAthleticsTotalReviewsDto;
+import com.ratemyschools.rate.dto.AthleticReviews.*;
 import com.ratemyschools.rate.model.AthleticsReview;
 import com.ratemyschools.rate.service.AthleticReviewService;
 import com.ratemyschools.rate.service.JwtService;
@@ -69,5 +66,11 @@ public class AthleticsReviewController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/getAllSchoolsAthleticsAverage")
+    public ResponseEntity<List<SchoolAthleticsAverageDto>> getAllSchoolsAthleticsAverage() {
+        List<SchoolAthleticsAverageDto> averages = athleticReviewService.getAverageRatingsForAllSchools();
+        return ResponseEntity.ok(averages);
     }
 }

@@ -1,5 +1,6 @@
 package com.ratemyschools.rate.repository;
 
+import com.ratemyschools.rate.dto.LifeStylesReview.SchoolLifeStyleAverageDto;
 import com.ratemyschools.rate.model.LifeStyleReview;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -17,4 +18,9 @@ public interface LifeStylesReviewRepository extends CrudRepository<LifeStyleRevi
 
     @Query("SELECT COUNT(l) FROM LifeStyleReview l WHERE l.lifeStyle.id = :lifeStyleId")
     Long countByLifeStylesId(Long lifeStyleId);
+
+    @Query("SELECT new com.ratemyschools.rate.dto.LifeStylesReview.SchoolLifeStyleAverageDto(l.lifeStyle.school.id, l.lifeStyle.school.schoolName, AVG(l.rating)) " +
+            "FROM LifeStyleReview l GROUP BY l.lifeStyle.school.id, l.lifeStyle.school.schoolName")
+    List<SchoolLifeStyleAverageDto> findAverageLifeStyleRatingForAllSchools();
+
 }

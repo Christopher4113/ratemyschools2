@@ -1,10 +1,7 @@
 package com.ratemyschools.rate.controller;
 
 
-import com.ratemyschools.rate.dto.ClubReviews.AddClubsReviewDto;
-import com.ratemyschools.rate.dto.ClubReviews.GetClubsAverageRatingDto;
-import com.ratemyschools.rate.dto.ClubReviews.GetClubsReviewDto;
-import com.ratemyschools.rate.dto.ClubReviews.GetClubsTotalReviewsDto;
+import com.ratemyschools.rate.dto.ClubReviews.*;
 import com.ratemyschools.rate.model.ClubsReview;
 import com.ratemyschools.rate.service.ClubReviewService;
 import com.ratemyschools.rate.service.JwtService;
@@ -70,4 +67,10 @@ public class ClubsReviewController {
             return ResponseEntity.notFound().build();
         }
     }
+    @GetMapping("/getAllSchoolsClubsAverage")
+    public ResponseEntity<List<SchoolClubsAverageDto>> getAllSchoolsClubsAverage() {
+        List<SchoolClubsAverageDto> averages = clubReviewService.getAverageRatingsForAllSchools();
+        return ResponseEntity.ok(averages);
+    }
+
 }

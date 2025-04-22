@@ -3,6 +3,7 @@ package com.ratemyschools.rate.service;
 
 import com.ratemyschools.rate.dto.HousingReviews.AddHousingReviewDto;
 import com.ratemyschools.rate.dto.HousingReviews.GetHousingReviewDto;
+import com.ratemyschools.rate.dto.HousingReviews.SchoolHousingAverageDto;
 import com.ratemyschools.rate.model.HousingReview;
 import com.ratemyschools.rate.repository.HousingReviewRepository;
 import org.springframework.stereotype.Service;
@@ -49,4 +50,8 @@ public class HousingReviewService {
         }
         return false;
     }
+    public List<SchoolHousingAverageDto> getAverageRatingsForAllSchools() {
+        return housingReviewRepository.findAverageHousingRatingForAllSchools();
+    }
+
 }

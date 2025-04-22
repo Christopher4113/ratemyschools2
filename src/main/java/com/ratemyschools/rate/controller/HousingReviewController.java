@@ -1,9 +1,6 @@
 package com.ratemyschools.rate.controller;
 
-import com.ratemyschools.rate.dto.HousingReviews.AddHousingReviewDto;
-import com.ratemyschools.rate.dto.HousingReviews.GetHousingAverageRatingDto;
-import com.ratemyschools.rate.dto.HousingReviews.GetHousingReviewDto;
-import com.ratemyschools.rate.dto.HousingReviews.GetHousingTotalReviewsDto;
+import com.ratemyschools.rate.dto.HousingReviews.*;
 import com.ratemyschools.rate.model.HousingReview;
 import com.ratemyschools.rate.service.HousingReviewService;
 import com.ratemyschools.rate.service.JwtService;
@@ -69,5 +66,11 @@ public class HousingReviewController {
             return ResponseEntity.notFound().build();
         }
     }
+    @GetMapping("/getAllSchoolsHousingAverage")
+    public ResponseEntity<List<SchoolHousingAverageDto>> getAllSchoolsHousingAverage() {
+        List<SchoolHousingAverageDto> averages = housingReviewService.getAverageRatingsForAllSchools();
+        return ResponseEntity.ok(averages);
+    }
+
 
 }
