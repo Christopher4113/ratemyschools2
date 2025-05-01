@@ -13,7 +13,6 @@ import java.util.Date;
 
 @RequestMapping("/auth")
 @RestController
-@CrossOrigin("http://localhost:5173")
 public class AthleticsReviewController {
     private final JwtService jwtService;
     private final AthleticReviewService athleticReviewService;

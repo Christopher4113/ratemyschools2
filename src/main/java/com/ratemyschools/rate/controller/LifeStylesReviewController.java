@@ -12,7 +12,6 @@ import java.util.Date;
 
 @RequestMapping("/auth")
 @RestController
-@CrossOrigin("http://localhost:5173")
 public class LifeStylesReviewController {
     private final JwtService jwtService;
     private final LifeStyleReviewService lifeStyleReviewService;

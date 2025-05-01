@@ -13,7 +13,6 @@ import java.util.List;
 
 @RequestMapping("/auth")
 @RestController
-@CrossOrigin("http://localhost:5173")
 public class HousingReviewController {
     private final JwtService jwtService;
     private final HousingReviewService housingReviewService;

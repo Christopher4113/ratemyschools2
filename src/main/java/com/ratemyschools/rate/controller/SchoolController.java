@@ -17,7 +17,6 @@ import java.util.Optional;
 
 @RequestMapping("/auth")
 @RestController
-@CrossOrigin("http://localhost:5173")
 public class SchoolController {
     private final JwtService jwtService;
 

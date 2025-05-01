@@ -27,7 +27,6 @@ import java.util.*;
 
 @RequestMapping("/auth")
 @RestController
-@CrossOrigin("http://localhost:5173")
 public class ProfileController {
 
     @Value("${groq.api.key}")

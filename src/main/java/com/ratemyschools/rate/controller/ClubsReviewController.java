@@ -14,7 +14,6 @@ import java.util.List;
 
 @RequestMapping("/auth")
 @RestController
-@CrossOrigin("http://localhost:5173")
 public class ClubsReviewController {
     private final JwtService jwtService;
     private final ClubReviewService clubReviewService;
