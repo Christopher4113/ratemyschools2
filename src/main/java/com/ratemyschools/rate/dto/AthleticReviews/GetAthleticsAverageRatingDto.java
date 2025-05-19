@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 public class GetAthleticsAverageRatingDto {
     private Long id;
-    private Integer averageRating;
+    private Double averageRating;
 
     public Long getId() {
         return id;
@@ -18,11 +18,11 @@ public class GetAthleticsAverageRatingDto {
         this.id = id;
     }
 
-    public Integer getAverageRating() {
+    public Double getAverageRating() {
         return averageRating;
     }
 
-    public void setAverageRating(Integer averageRating) {
+    public void setAverageRating(Double averageRating) {
         this.averageRating = averageRating;
     }
 }

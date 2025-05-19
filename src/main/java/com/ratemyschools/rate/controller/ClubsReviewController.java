@@ -30,7 +30,7 @@ public class ClubsReviewController {
 
     @GetMapping("/getClubsAverageRating/{id}")
     public GetClubsAverageRatingDto getClubsAverageRating(@PathVariable("id") Long id) {
-        Integer averageRating = clubReviewService.getAverageRating(id);
+        Double averageRating = clubReviewService.getAverageRating(id);
         GetClubsAverageRatingDto dto = new GetClubsAverageRatingDto();
         dto.setId(id);
         dto.setAverageRating(averageRating);

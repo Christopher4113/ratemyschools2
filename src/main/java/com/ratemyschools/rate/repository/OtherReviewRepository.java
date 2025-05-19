@@ -14,7 +14,7 @@ public interface OtherReviewRepository extends CrudRepository<OtherReview,Long> 
     List<OtherReview> findByRating(Long rating);
 
     @Query("SELECT AVG(o.rating) FROM OtherReview o WHERE o.other.id = :othersId")
-    Integer findAverageRatingByOthersId(Long othersId);
+    Double findAverageRatingByOthersId(Long othersId);
 
     @Query("SELECT COUNT(o) FROM OtherReview o WHERE o.other.id = :othersId")
     Long countByOthersId(Long othersId);

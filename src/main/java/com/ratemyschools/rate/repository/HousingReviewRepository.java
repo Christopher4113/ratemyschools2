@@ -14,7 +14,7 @@ public interface HousingReviewRepository extends CrudRepository<HousingReview,Lo
     List<HousingReview> findByRating(Long rating);
 
     @Query("SELECT AVG(h.rating) FROM HousingReview h WHERE h.housing.id =:housingId")
-    Integer findAverageRatingByHousingId(Long housingId);
+    Double findAverageRatingByHousingId(Long housingId);
 
     @Query("SELECT COUNT(h) FROM HousingReview h WHERE h.housing.id =:housingId")
     Long countByHousingId(Long housingId);

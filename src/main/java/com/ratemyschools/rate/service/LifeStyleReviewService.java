@@ -29,7 +29,7 @@ public class LifeStyleReviewService {
         }).collect(Collectors.toList());
     }
 
-    public Integer getAverageRating(Long lifeStyleId) {
+    public Double getAverageRating(Long lifeStyleId) {
         return lifeStylesReviewRepository.findAverageRatingByLifeStylesId(lifeStyleId);
     }
     public Long getTotalReviews(Long lifeStyleId) {

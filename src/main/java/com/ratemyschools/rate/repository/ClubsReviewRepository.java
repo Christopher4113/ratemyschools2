@@ -14,7 +14,7 @@ public interface ClubsReviewRepository extends CrudRepository<ClubsReview,Long> 
     List<ClubsReview> findByRating(Long rating);
 
     @Query("SELECT AVG(c.rating) FROM ClubsReview c WHERE c.clubs.id = :clubsId")
-    Integer findAverageRatingByClubsId(Long clubsId);
+    Double findAverageRatingByClubsId(Long clubsId);
 
     @Query("SELECT COUNT(c) FROM ClubsReview c WHERE c.clubs.id = :clubsId")
     Long countByClubsId(Long clubsId);

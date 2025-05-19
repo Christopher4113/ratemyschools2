@@ -28,7 +28,7 @@ public class LifeStylesReviewController {
 
     @GetMapping("/getLifeStylesAverageRating/{id}")
     public GetLifeStylesAverageRatingDto getLifeStylesAverageRating(@PathVariable("id") Long id) {
-        Integer averageRating = lifeStyleReviewService.getAverageRating(id);
+        Double averageRating = lifeStyleReviewService.getAverageRating(id);
         GetLifeStylesAverageRatingDto dto = new GetLifeStylesAverageRatingDto();
         dto.setId(id);
         dto.setAverageRating(averageRating);

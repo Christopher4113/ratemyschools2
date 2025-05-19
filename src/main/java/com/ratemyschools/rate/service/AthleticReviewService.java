@@ -29,7 +29,7 @@ public class AthleticReviewService {
             return dto;
         }).collect(Collectors.toList());
     }
-    public Integer getAverageRating(Long athleteId) {
+    public Double getAverageRating(Long athleteId) {
         return athleticsReviewRepository.findAverageRatingByAthleticsId(athleteId);
     }
     public Long getTotalReviews(Long athleteId) {

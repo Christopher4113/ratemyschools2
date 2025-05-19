@@ -30,7 +30,7 @@ public class HousingReviewService {
         }).collect(Collectors.toList());
     }
 
-    public Integer getAverageRating(Long housingId) {return housingReviewRepository.findAverageRatingByHousingId(housingId);}
+    public Double getAverageRating(Long housingId) {return housingReviewRepository.findAverageRatingByHousingId(housingId);}
 
     public Long getTotalReviews(Long housingId) {return housingReviewRepository.countByHousingId(housingId);}
 

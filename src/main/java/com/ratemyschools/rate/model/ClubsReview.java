@@ -15,8 +15,8 @@ public class ClubsReview {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="rating")
-    private Integer rating;
+    @Column(name="rating", columnDefinition = "DOUBLE PRECISION")
+    private Double rating;
 
     @Column(name = "review", columnDefinition = "TEXT")
     private String review;

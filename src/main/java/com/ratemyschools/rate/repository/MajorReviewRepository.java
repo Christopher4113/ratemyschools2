@@ -16,7 +16,7 @@ public interface MajorReviewRepository extends CrudRepository<MajorReview, Long>
     List<MajorReview> findByRating(Long rating);
 
     @Query("SELECT AVG(m.rating) FROM MajorReview m WHERE m.major.id = :majorsId")
-    Integer findAverageRatingByMajorsId(Long majorsId);
+    Double findAverageRatingByMajorsId(Long majorsId);
 
     @Query("SELECT COUNT(m) FROM MajorReview m WHERE m.major.id = :majorsId")
     Long countByMajorsId(Long majorsId);

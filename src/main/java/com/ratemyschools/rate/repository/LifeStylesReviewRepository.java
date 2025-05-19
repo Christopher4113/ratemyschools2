@@ -14,7 +14,7 @@ public interface LifeStylesReviewRepository extends CrudRepository<LifeStyleRevi
     List<LifeStyleReview> findByRating(Long rating);
 
     @Query("SELECT AVG(l.rating) FROM LifeStyleReview l WHERE l.lifeStyle.id = :lifeStyleId")
-    Integer findAverageRatingByLifeStylesId(Long lifeStyleId);
+    Double findAverageRatingByLifeStylesId(Long lifeStyleId);
 
     @Query("SELECT COUNT(l) FROM LifeStyleReview l WHERE l.lifeStyle.id = :lifeStyleId")
     Long countByLifeStylesId(Long lifeStyleId);

@@ -29,7 +29,7 @@ public class MajorReviewService {
         }).collect(Collectors.toList());
     }
 
-    public Integer getAverageRating(Long majorId) {return majorReviewRepository.findAverageRatingByMajorsId(majorId);}
+    public Double getAverageRating(Long majorId) {return majorReviewRepository.findAverageRatingByMajorsId(majorId);}
 
     public Long getTotalReviews(Long majorId) {return majorReviewRepository.countByMajorsId(majorId);}
 

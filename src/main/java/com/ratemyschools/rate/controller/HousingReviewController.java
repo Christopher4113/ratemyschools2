@@ -29,7 +29,7 @@ public class HousingReviewController {
 
     @GetMapping("/getHousingAverageRating/{id}")
     public GetHousingAverageRatingDto getHousingAverageRating(@PathVariable("id") Long id) {
-        Integer averageRating = housingReviewService.getAverageRating(id);
+        Double averageRating = housingReviewService.getAverageRating(id);
         GetHousingAverageRatingDto dto = new GetHousingAverageRatingDto();
         dto.setId(id);
         dto.setAverageRating(averageRating);

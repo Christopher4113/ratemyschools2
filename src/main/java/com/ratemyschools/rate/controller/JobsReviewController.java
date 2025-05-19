@@ -29,7 +29,7 @@ public class JobsReviewController {
 
     @GetMapping("/getJobsAverageRating/{id}")
     public GetJobsAverageRatingDto getJobsAverageRating(@PathVariable("id") Long id) {
-        Integer averageRating = jobReviewService.getAverageRating(id);
+        Double averageRating = jobReviewService.getAverageRating(id);
         GetJobsAverageRatingDto dto = new GetJobsAverageRatingDto();
         dto.setId(id);
         dto.setAverageRating(averageRating);

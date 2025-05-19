@@ -29,7 +29,7 @@ public class ClubReviewService {
         }).collect(Collectors.toList());
     }
 
-    public Integer getAverageRating(Long clubId) {
+    public Double getAverageRating(Long clubId) {
         return clubsReviewRepository.findAverageRatingByClubsId(clubId);
     }
 

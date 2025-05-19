@@ -14,7 +14,7 @@ public interface AthleticsReviewRepository extends CrudRepository<AthleticsRevie
     List<AthleticsReview> findByRating(Long rating);
 
     @Query("SELECT AVG(a.rating) FROM AthleticsReview a WHERE a.athletics.id = :athleticsId")
-    Integer findAverageRatingByAthleticsId(Long athleticsId);
+    Double findAverageRatingByAthleticsId(Long athleticsId);
 
     @Query("SELECT COUNT(a) FROM AthleticsReview a WHERE a.athletics.id = :athleticsId")
     Long countByAthleticsId(Long athleticsId);

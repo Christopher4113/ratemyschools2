@@ -10,7 +10,7 @@ import java.util.Date;
 @Setter
 public class AddOthersReviewDto {
     private Other other;
-    private Integer rating;
+    private Double rating;
     private String review;
     private Date createdAt;
 
@@ -22,11 +22,11 @@ public class AddOthersReviewDto {
         this.other = other;
     }
 
-    public Integer getRating() {
+    public Double getRating() {
         return rating;
     }
 
-    public void setRating(Integer rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
 

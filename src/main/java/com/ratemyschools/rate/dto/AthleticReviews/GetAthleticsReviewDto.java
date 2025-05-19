@@ -9,7 +9,7 @@ import java.util.Date;
 @Setter
 public class GetAthleticsReviewDto {
     private Long id;
-    private Integer rating;
+    private Double rating;
     private String review;
     private Date createdAt;
 
@@ -21,11 +21,11 @@ public class GetAthleticsReviewDto {
         this.id = id;
     }
 
-    public Integer getRating() {
+    public Double getRating() {
         return rating;
     }
 
-    public void setRating(Integer rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
 

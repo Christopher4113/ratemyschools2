@@ -14,7 +14,7 @@ public interface JobsReviewRepository extends CrudRepository<JobsReview,Long> {
     List<JobsReview> findByRating(Long rating);
 
     @Query("SELECT AVG(j.rating) FROM JobsReview j WHERE j.jobs.id = :jobsId")
-    Integer findAverageRatingByJobsId(Long jobsId);
+    Double findAverageRatingByJobsId(Long jobsId);
 
     @Query("SELECT COUNT(j) FROM JobsReview j WHERE j.jobs.id = :jobsId")
     Long countByJobsId(Long jobsId);

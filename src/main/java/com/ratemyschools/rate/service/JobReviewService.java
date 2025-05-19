@@ -28,7 +28,7 @@ public class JobReviewService {
             return dto;
         }).collect(Collectors.toList());
     }
-    public Integer getAverageRating(Long jobId) {
+    public Double getAverageRating(Long jobId) {
         return jobsReviewRepository.findAverageRatingByJobsId(jobId);
     }
 

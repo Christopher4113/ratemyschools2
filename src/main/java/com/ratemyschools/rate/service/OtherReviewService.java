@@ -29,7 +29,7 @@ public class OtherReviewService {
         }).collect(Collectors.toList());
     }
 
-    public Integer getAverageRating(Long otherId) {return otherReviewRepository.findAverageRatingByOthersId(otherId);}
+    public Double getAverageRating(Long otherId) {return otherReviewRepository.findAverageRatingByOthersId(otherId);}
 
     public Long getTotalReviews(Long otherId) {return  otherReviewRepository.countByOthersId(otherId);}
 
