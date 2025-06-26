@@ -26,6 +26,7 @@ public class HousingReviewService {
             dto.setRating(housingReview.getRating());
             dto.setReview(housingReview.getReview());
             dto.setCreatedAt(housingReview.getCreatedAt());
+            dto.setUsername(housingReview.getUsername());
             return dto;
         }).collect(Collectors.toList());
     }
@@ -40,6 +41,7 @@ public class HousingReviewService {
         housingReview.setRating(input.getRating());
         housingReview.setReview(input.getReview());
         housingReview.setCreatedAt(input.getCreatedAt());
+        housingReview.setUsername(input.getUsername());
         return housingReviewRepository.save(housingReview);
     }
 

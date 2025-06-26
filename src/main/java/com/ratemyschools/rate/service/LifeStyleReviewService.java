@@ -25,6 +25,7 @@ public class LifeStyleReviewService {
             dto.setRating(lifeStyleReview.getRating());
             dto.setReview(lifeStyleReview.getReview());
             dto.setCreatedAt(lifeStyleReview.getCreatedAt());
+            dto.setUsername(lifeStyleReview.getUsername());
             return dto;
         }).collect(Collectors.toList());
     }
@@ -42,6 +43,7 @@ public class LifeStyleReviewService {
         lifeStyleReview.setRating(input.getRating());
         lifeStyleReview.setReview(input.getReview());
         lifeStyleReview.setCreatedAt(input.getCreatedAt());
+        lifeStyleReview.setUsername(input.getUsername());
         return lifeStylesReviewRepository.save(lifeStyleReview);
     }
 

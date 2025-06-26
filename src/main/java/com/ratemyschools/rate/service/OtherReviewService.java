@@ -25,6 +25,7 @@ public class OtherReviewService {
             dto.setRating(otherReview.getRating());
             dto.setReview(otherReview.getReview());
             dto.setCreatedAt(otherReview.getCreatedAt());
+            dto.setUsername(otherReview.getUsername());
             return dto;
         }).collect(Collectors.toList());
     }
@@ -39,6 +40,7 @@ public class OtherReviewService {
         otherReview.setRating(input.getRating());
         otherReview.setReview(input.getReview());
         otherReview.setCreatedAt(input.getCreatedAt());
+        otherReview.setUsername(input.getUsername());
         return otherReviewRepository.save(otherReview);
     }
     public boolean deleteOtherReviewById(Long id) {

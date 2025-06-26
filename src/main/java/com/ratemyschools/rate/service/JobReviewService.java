@@ -25,6 +25,7 @@ public class JobReviewService {
             dto.setRating(jobsReview.getRating());
             dto.setReview(jobsReview.getReview());
             dto.setCreatedAt(jobsReview.getCreatedAt());
+            dto.setUsername(jobsReview.getUsername());
             return dto;
         }).collect(Collectors.toList());
     }
@@ -41,6 +42,7 @@ public class JobReviewService {
         jobsReview.setRating(input.getRating());
         jobsReview.setReview(input.getReview());
         jobsReview.setCreatedAt(input.getCreatedAt());
+        jobsReview.setUsername(input.getUsername());
         return  jobsReviewRepository.save(jobsReview);
     }
 

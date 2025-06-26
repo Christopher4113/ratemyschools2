@@ -13,6 +13,15 @@ public class AddHousingReviewDto {
     private Double rating;
     private String review;
     private Date createdAt;
+    private String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public Housing getHousing() {
         return housing;

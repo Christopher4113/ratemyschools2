@@ -21,6 +21,9 @@ public class MajorReview {
     @Column(name = "review", columnDefinition = "TEXT")
     private String review;
 
+    @Column(name="username", columnDefinition = "TEXT")
+    private String username;
+
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at")

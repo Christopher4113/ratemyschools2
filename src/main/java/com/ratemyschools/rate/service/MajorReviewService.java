@@ -25,6 +25,7 @@ public class MajorReviewService {
             dto.setRating(majorsReview.getRating());
             dto.setReview(majorsReview.getReview());
             dto.setCreatedAt(majorsReview.getCreatedAt());
+            dto.setUsername(majorsReview.getUsername());
             return dto;
         }).collect(Collectors.toList());
     }
@@ -39,6 +40,7 @@ public class MajorReviewService {
         majorsReview.setRating(input.getRating());
         majorsReview.setReview(input.getReview());
         majorsReview.setCreatedAt(input.getCreatedAt());
+        majorsReview.setUsername(input.getUsername());
         return majorReviewRepository.save(majorsReview);
     }
 

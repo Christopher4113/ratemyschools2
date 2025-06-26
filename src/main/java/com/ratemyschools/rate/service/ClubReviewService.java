@@ -25,6 +25,7 @@ public class ClubReviewService {
             dto.setRating(clubsReview.getRating());
             dto.setReview(clubsReview.getReview());
             dto.setCreatedAt(clubsReview.getCreatedAt());
+            dto.setUsername(clubsReview.getUsername());
             return dto;
         }).collect(Collectors.toList());
     }
@@ -43,6 +44,7 @@ public class ClubReviewService {
         clubsReview.setRating(input.getRating());
         clubsReview.setReview(input.getReview());
         clubsReview.setCreatedAt(input.getCreatedAt());
+        clubsReview.setUsername(input.getUsername());
         return clubsReviewRepository.save(clubsReview);
     }
 

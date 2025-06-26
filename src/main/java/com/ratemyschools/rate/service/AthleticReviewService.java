@@ -26,6 +26,7 @@ public class AthleticReviewService {
             dto.setRating(athleticsReview.getRating());
             dto.setReview(athleticsReview.getReview());
             dto.setCreatedAt(athleticsReview.getCreatedAt());
+            dto.setUsername(athleticsReview.getUsername());
             return dto;
         }).collect(Collectors.toList());
     }
@@ -42,6 +43,7 @@ public class AthleticReviewService {
         athleticsReview.setRating(input.getRating());
         athleticsReview.setReview(input.getReview());
         athleticsReview.setCreatedAt(input.getCreatedAt());
+        athleticsReview.setUsername(input.getUsername());
 
         return athleticsReviewRepository.save(athleticsReview);
     }
