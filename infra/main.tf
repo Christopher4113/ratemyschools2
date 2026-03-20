@@ -171,42 +171,42 @@ resource "aws_iam_role_policy" "apprunner_instance_policy" {
 
 resource "aws_secretsmanager_secret" "spring_datasource_url" {
   name                    = "ratemyschools/spring-datasource-url"
-  recovery_window_in_days = 0
+  recovery_window_in_days = 7
 }
 
 resource "aws_secretsmanager_secret_version" "spring_datasource_url" {
   secret_id     = aws_secretsmanager_secret.spring_datasource_url.id
-  secret_string = "jdbc:postgresql://ep-floral-haze-a5lw1n4t.us-east-2.aws.neon.tech/neondb?user=neondb_owner&password=Jo9X1IgUnWBa&sslmode=require"
+  secret_string = var.spring_datasource_url
 }
 
 resource "aws_secretsmanager_secret" "jwt_secret_key" {
   name                    = "ratemyschools/jwt-secret-key"
-  recovery_window_in_days = 0
+  recovery_window_in_days = 7
 }
 
 resource "aws_secretsmanager_secret_version" "jwt_secret_key" {
   secret_id     = aws_secretsmanager_secret.jwt_secret_key.id
-  secret_string = "K1Q2sdf8xPlK9oK2z6lN/ht2Yb4sQwKfHhiFJtR6l7A"
+  secret_string = var.jwt_secret_key
 }
 
 resource "aws_secretsmanager_secret" "app_password" {
   name                    = "ratemyschools/app-password"
-  recovery_window_in_days = 0
+  recovery_window_in_days = 7
 }
 
 resource "aws_secretsmanager_secret_version" "app_password" {
   secret_id     = aws_secretsmanager_secret.app_password.id
-  secret_string = "odeh cipu ehua dogw"
+  secret_string = var.app_password
 }
 
 resource "aws_secretsmanager_secret" "groq_api_key" {
   name                    = "ratemyschools/groq-api-key"
-  recovery_window_in_days = 0
+  recovery_window_in_days = 7
 }
 
 resource "aws_secretsmanager_secret_version" "groq_api_key" {
   secret_id     = aws_secretsmanager_secret.groq_api_key.id
-  secret_string = "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"
+  secret_string = var.groq_api_key
 }
 
 output "ecr_repository_url" {

@@ -41,4 +41,7 @@ out/
 infra/.terraform/
 infra/*.tfstate
 infra/*.tfstate.backup
+infra/*.tfstate.bak
 infra/.terraform.lock.hcl
+infra/*.tfvars
+infra/tfplan
