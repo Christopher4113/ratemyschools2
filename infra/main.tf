@@ -44,9 +44,13 @@ resource "aws_iam_role_policy" "codebuild_policy" {
     Version = "2012-10-17"
     Statement = [
       {
+        Effect   = "Allow"
+        Action   = "ecr:GetAuthorizationToken"
+        Resource = "*"
+      },
+      {
         Effect = "Allow"
         Action = [
-          "ecr:GetAuthorizationToken",
           "ecr:BatchCheckLayerAvailability",
           "ecr:GetDownloadUrlForLayer",
           "ecr:BatchGetImage",
@@ -55,7 +59,7 @@ resource "aws_iam_role_policy" "codebuild_policy" {
           "ecr:UploadLayerPart",
           "ecr:CompleteLayerUpload"
         ]
-        Resource = "*"
+        Resource = aws_ecr_repository.ratemyschools_backend.arn
       },
       {
         Effect = "Allow"
@@ -63,16 +67,6 @@ resource "aws_iam_role_policy" "codebuild_policy" {
           "logs:CreateLogGroup",
           "logs:CreateLogStream",
           "logs:PutLogEvents"
-        ]
-        Resource = "*"
-      },
-      {
-        Effect = "Allow"
-        Action = [
-          "s3:GetObject",
-          "s3:PutObject",
-          "s3:GetBucketAcl",
-          "s3:GetBucketLocation"
         ]
         Resource = "*"
       }
