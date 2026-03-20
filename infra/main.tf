@@ -177,3 +177,56 @@ output "apprunner_ecr_access_role_arn" {
 output "apprunner_instance_role_arn" {
   value = aws_iam_role.apprunner_instance_role.arn
 }
+
+resource "aws_apprunner_service" "ratemyschools_backend" {
+  service_name = "ratemyschools-backend"
+
+  source_configuration {
+    authentication_configuration {
+      access_role_arn = aws_iam_role.apprunner_ecr_access_role.arn
+    }
+
+    image_repository {
+      image_identifier      = "${aws_ecr_repository.ratemyschools_backend.repository_url}:latest"
+      image_repository_type = "ECR"
+
+      image_configuration {
+        port = "8080"
+
+        runtime_environment_variables = {
+          SPRING_DATASOURCE_URL = "jdbc:postgresql://ep-floral-haze-a5lw1n4t.us-east-2.aws.neon.tech/neondb?user=neondb_owner&password=Jo9X1IgUnWBa&sslmode=require"
+          JWT_SECRET_KEY        = "K1Q2sdf8xPlK9oK2z6lN/ht2Yb4sQwKfHhiFJtR6l7A"
+          SUPPORT_EMAIL         = "ratemyschools@gmail.com"
+          APP_PASSWORD          = "odeh cipu ehua dogw"
+          GROQ_API_KEY          = "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"
+          FRONTEND_URL          = "https://rate-my-schools.vercel.app"
+        }
+      }
+    }
+
+    auto_deployments_enabled = false
+  }
+
+  instance_configuration {
+    instance_role_arn = aws_iam_role.apprunner_instance_role.arn
+    cpu               = "1024"
+    memory            = "2048"
+  }
+
+  health_check_configuration {
+    protocol            = "TCP"
+    path                = "/"
+    interval            = 10
+    timeout             = 5
+    healthy_threshold   = 1
+    unhealthy_threshold = 5
+  }
+
+  tags = {
+    Name = "ratemyschools-backend"
+  }
+}
+
+output "apprunner_service_url" {
+  value = aws_apprunner_service.ratemyschools_backend.service_url
+}
