@@ -157,9 +157,56 @@ resource "aws_iam_role_policy" "apprunner_instance_policy" {
           "logs:PutLogEvents"
         ]
         Resource = "*"
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "secretsmanager:GetSecretValue"
+        ]
+        Resource = "arn:aws:secretsmanager:us-east-1:530743905127:secret:ratemyschools/*"
       }
     ]
   })
+}
+
+resource "aws_secretsmanager_secret" "spring_datasource_url" {
+  name                    = "ratemyschools/spring-datasource-url"
+  recovery_window_in_days = 0
+}
+
+resource "aws_secretsmanager_secret_version" "spring_datasource_url" {
+  secret_id     = aws_secretsmanager_secret.spring_datasource_url.id
+  secret_string = "jdbc:postgresql://ep-floral-haze-a5lw1n4t.us-east-2.aws.neon.tech/neondb?user=neondb_owner&password=Jo9X1IgUnWBa&sslmode=require"
+}
+
+resource "aws_secretsmanager_secret" "jwt_secret_key" {
+  name                    = "ratemyschools/jwt-secret-key"
+  recovery_window_in_days = 0
+}
+
+resource "aws_secretsmanager_secret_version" "jwt_secret_key" {
+  secret_id     = aws_secretsmanager_secret.jwt_secret_key.id
+  secret_string = "K1Q2sdf8xPlK9oK2z6lN/ht2Yb4sQwKfHhiFJtR6l7A"
+}
+
+resource "aws_secretsmanager_secret" "app_password" {
+  name                    = "ratemyschools/app-password"
+  recovery_window_in_days = 0
+}
+
+resource "aws_secretsmanager_secret_version" "app_password" {
+  secret_id     = aws_secretsmanager_secret.app_password.id
+  secret_string = "odeh cipu ehua dogw"
+}
+
+resource "aws_secretsmanager_secret" "groq_api_key" {
+  name                    = "ratemyschools/groq-api-key"
+  recovery_window_in_days = 0
+}
+
+resource "aws_secretsmanager_secret_version" "groq_api_key" {
+  secret_id     = aws_secretsmanager_secret.groq_api_key.id
+  secret_string = "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"
 }
 
 output "ecr_repository_url" {
@@ -194,12 +241,15 @@ resource "aws_apprunner_service" "ratemyschools_backend" {
         port = "8080"
 
         runtime_environment_variables = {
-          SPRING_DATASOURCE_URL = "jdbc:postgresql://ep-floral-haze-a5lw1n4t.us-east-2.aws.neon.tech/neondb?user=neondb_owner&password=Jo9X1IgUnWBa&sslmode=require"
-          JWT_SECRET_KEY        = "K1Q2sdf8xPlK9oK2z6lN/ht2Yb4sQwKfHhiFJtR6l7A"
-          SUPPORT_EMAIL         = "ratemyschools@gmail.com"
-          APP_PASSWORD          = "odeh cipu ehua dogw"
-          GROQ_API_KEY          = "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"
-          FRONTEND_URL          = "https://rate-my-schools.vercel.app"
+          SUPPORT_EMAIL = "ratemyschools@gmail.com"
+          FRONTEND_URL  = "https://rate-my-schools.vercel.app"
+        }
+
+        runtime_environment_secrets = {
+          SPRING_DATASOURCE_URL = aws_secretsmanager_secret.spring_datasource_url.arn
+          JWT_SECRET_KEY        = aws_secretsmanager_secret.jwt_secret_key.arn
+          APP_PASSWORD          = aws_secretsmanager_secret.app_password.arn
+          GROQ_API_KEY          = aws_secretsmanager_secret.groq_api_key.arn
         }
       }
     }
